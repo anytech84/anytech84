@@ -1,7 +1,3 @@
 ## Hi there 👋
 
-- 🔭 I’m currently working on kernel rootkits
-- 🌱 I’m currently learning linux from scratch
-- 👯 I’m looking to collaborate on anything interesting
-- 💬 Ask me about living life outside IT
-- 📫 How to reach me: search for it
+Welcome to my GitHub page. I am AnyTech84 as OpSec requires. Here, you can find some of my dotfiles, which often evolves.
