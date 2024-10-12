@@ -1,0 +1,9 @@
+### Environment Variables ###
+
+# ZSH History setup
+export HISTSIZE=100
+export SAVEHIST=100
+
+# Editor
+export EDITOR=vim
+

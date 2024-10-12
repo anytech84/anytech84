@@ -1,0 +1,73 @@
+#!/bin/zsh
+
+# CD
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~='cd ~'
+alias - -='cd -'
+# HOME
+alias gd="cd ~/Google\ Drive"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias docs="cd ~/Documents"
+alias dev="cd ~/Developer"
+alias vm="cd ~/Virtual\ Machines.localized/"
+# LS
+alias ls='ls -G'
+alias l='ls -l'
+alias ll='ls -latFho'   #long list,sorted by date,show type,human readable
+alias la='ls -ld .*' #list dot files
+# SOURCE
+alias up='source ~/.zshrc'
+alias ed='vim ~/.zsh'
+alias stop='deactivate'
+# GIT
+alias gc="git commit -m"
+alias gst="git status"
+alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
+alias gdiff="git diff"
+alias ga='git add'
+alias gp='git pull'
+# VMware
+alias deb=vmrun -T fusion start '$HOME/Virtual\ Machines.localized/debian.vmwarevm/debian.vmx'
+# EXEGOL
+alias exegol="source /opt/Exegol/Exegol-venv/bin/activate && exegol"
+alias htb='exegol start htb'
+
+### macOS specific ###
+
+# Disable Spotlight
+alias spotoff="sudo mdutil -a -i off"
+# Enable Spotlight
+alias spoton="sudo mdutil -a -i on"
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Empty the Trash on all mounted volumes and the main HDD.
+# Also, clear Apple’s System Logs to improve shell startup speed.
+# Finally, clear download history from quarantine. https://mths.be/bum
+alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+
+# Clean up LaunchServices to remove duplicates in the “Open With” menu
+alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+# Airport CLI alias
+alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+
+# Lock the screen (when going AFK)
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# One of @janmoesen’s ProTip™s
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+	alias "${method}"="lwp-request -m '${method}'"
+done
