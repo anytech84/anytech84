@@ -1,5 +1,5 @@
 ### STARTUP ###
-echo -e "\033[31mIs your machine ready ?\033[0m"
+echo -e "\033[31mWanna work ?\033[0m"
 zsh --version
 git -v
 brew -v
@@ -14,7 +14,7 @@ echo -e "\033[31mWanna zsh ?\033[0m"
 export ZDOTDIR=$HOME/.zsh
 for file in $ZDOTDIR/zsh_*; do
   source $file
-	echo -e "\033[33m$(basename $file) loaded\033[0m"
+	echo "$(basename $file | sed 's/^zsh_//g') loaded"
 done
 
 ### ZSH OPTIONS ###
