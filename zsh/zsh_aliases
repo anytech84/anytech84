@@ -30,6 +30,7 @@ alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bol
 alias gdiff="git diff"
 alias ga='git add'
 alias gp='git pull'
+alias GP='git push'
 # EXEGOL
 alias exegol="source /opt/Exegol/Exegol-venv/bin/activate && exegol"
 alias htb='exegol start htb'
