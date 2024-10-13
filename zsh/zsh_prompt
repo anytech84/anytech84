@@ -1,5 +1,5 @@
 #! /bin/zsh
 
-PROMPT="%# %B%n%b %~ "
+PROMPT="%B%n%b %~ %# "
 RPROMPT="%w at %*"
 

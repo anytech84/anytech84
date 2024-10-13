@@ -12,16 +12,13 @@ echo -e "\033[31mWanna pwn ?\033[0m"
 exegol version && deactivate
 
 #------------------------------------#
+######### Load zsh modules ##########
 export ZDOTDIR=$HOME/.zsh
-#------------------------------------#
-# PROMPT
-source $ZDOTDIR/zsh_prompt && echo -e "\033[33mPrompt loaded\033[0m"
-# ALIASES
-source $ZDOTDIR/zsh_aliases && echo -e "\033[33mAliases loaded\033[0m"
-# FUNCTIONS
-source $ZDOTDIR/zsh_functions && echo -e "\033[33mFunctions loaded\033[0m"
-# COMPLETIONS
-source $ZDOTDIR/zsh_completions && echo -e "\033[33mCompletions loaded\033[0m"
+for file in $ZDOTDIR/zsh_*; do
+  source $file
+	echo -e "\033[33m$(basename $file) loaded\033[0m"
+done
+######### Load zsh modules ##########
 #-----------------------------------#
 
 ### ZSH OPTIONS ###

@@ -31,7 +31,11 @@ alias gdiff="git diff"
 alias ga='git add'
 alias gp='git pull'
 # VMware
-alias deb=vmrun -T fusion start '$HOME/Virtual\ Machines.localized/debian.vmwarevm/debian.vmx'
+#alias deb="vmrun -T fusion start $HOME/Virtual\ Machines.localized/debian.vmwarevm/debian.vmx nogui"
+#alias deb_stop="vmrun stop $HOME/Virtual\ Machines.localized/debian.vmwarevm/debian.vmx"
+#alias deb_tools="vmrun -T fusion installTools $HOME/Virtual\ Machines.localized/debian.vmwarevm/debian.vmx"
+#alias deb_ip="vmrun getGuestIPAddress $HOME/Virtual\ Machines.localized/debian.vmwarevm/debian.vmx"
+#alias deb_ssh="ssh user@$(vmrun getGuestIPAddress $HOME/Virtual\ Machines.localized/debian.vmwarevm/debian.vmx)"
 # EXEGOL
 alias exegol="source /opt/Exegol/Exegol-venv/bin/activate && exegol"
 alias htb='exegol start htb'
