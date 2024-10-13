@@ -29,8 +29,8 @@ alias gs="git status"
 alias glog="git log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit"
 alias gdiff="git diff"
 alias ga='git add'
-alias gp='git pull'
-alias GP='git push'
+alias gpl='git pull'
+alias gps='git push'
 # EXEGOL
 alias exegol="source /opt/Exegol/Exegol-venv/bin/activate && exegol"
 alias htb='exegol start htb'
