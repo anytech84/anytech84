@@ -1,6 +1,6 @@
 ## Hi there 👋
 
-Welcome to my GitHub page. I am AnyTech84. Here, you can find my projects : 
+Welcome to my GitHub page. I am AnyTech84. Here, you can :
 - Configuration files, which often evolves.
 - Actual projects I am working on.
 - Write-ups of some CTF challenges I have done.
@@ -11,7 +11,8 @@ Welcome to my GitHub page. I am AnyTech84. Here, you can find my projects :
 I am a cybersecurity enthusiast. I am interested in a wide range of topics, such as :
 - Web application security
 - Network security
-- Reverse engineering
+- Sec DevOps
+- Forensics
 - Cryptography
 - Radio frequency
 - Sound engineering (My first passion and former job)
