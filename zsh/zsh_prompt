@@ -1,5 +1,50 @@
-#! /bin/zsh
 
-PROMPT="%B%n%b %~ %# "
-RPROMPT="%w at %*"
+# CONFIGURATION #
+autoload -Uz vcs_info colors
+
+
+### PROMPT ###
+PROMPT=""
+
+# Git status
+GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_SHOWCOLORHINTS="yes"
+. $ZDOTDIR/git-prompt.sh
+setopt PROMPT_SUBST
+PROMPT+='$(__git_ps1 (%s))'
+
+# Username
+PROMPT+=" %n"
+# Current directory
+PROMPT+=" %~"
+# Privilege level
+PROMPT+=" %# "
+
+### RPROMPT ###
+RPROMPT=""
+
+# Date
+RPROMPT="%w"
+# Time
+RPROMPT+=" at %*"
+# IP address in green
+
+# Public IP address
+RPROMPT+=" %F{green}$(curl -s http://whatismyip.akamai.com)%f"
+# BATTERY #
+# color #
+if pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "100"; then
+    RPROMPT+="%F{green}"
+elif pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "20"; then
+    RPROMPT+="%F{red}"
+else
+    RPROMPT+="%F{yellow}"
+fi
+# battery level #
+RPROMPT+=" $(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% "
+# charging #
+if pmset -g batt | grep -q " charging"; then
+    RPROMPT+=" ⚡"
+fi
+
 

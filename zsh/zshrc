@@ -10,16 +10,12 @@ echo "Node $(node -v)"
 ruby -v
 echo -e "\033[31mWanna pwn ?\033[0m"
 exegol version && deactivate
-
-#------------------------------------#
-######### Load zsh modules ##########
+echo -e "\033[31mWanna zsh ?\033[0m"
 export ZDOTDIR=$HOME/.zsh
 for file in $ZDOTDIR/zsh_*; do
   source $file
 	echo -e "\033[33m$(basename $file) loaded\033[0m"
 done
-######### Load zsh modules ##########
-#-----------------------------------#
 
 ### ZSH OPTIONS ###
 

@@ -4,6 +4,71 @@
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" } 
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
 
+# Initial setup function for a new Mac
+function setup {
+	# Check if git is installed
+	if test ! $(which git); then
+  	echo "Installing Git..."
+  	git
+	fi
+	# Check if Homebrew is installed
+	if test ! $(which brew); then
+  	echo "Installing Homebrew..."
+  	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	fi
+	# Brew setup
+	brew update && brew upgrade
+	# Formulaes
+	brew install coreutils gh gnupg gdb nmap openssl openvpn pyenv tree 
+	# Ask for level of setup to be done
+  
+	echo "Which level of setup would you like to do?"
+	echo "0. No casks"
+	echo "1. Basic"
+	echo "2. Intermediate"
+  echo "3. Advanced"
+	read -p "Enter your choice: " choice
+	case $choice in
+		0) echo "No casks selected. Exiting..." ;;
+		1) basic_setup ;;
+		2) intermediate_setup ;;
+		3) advanced_setup ;;
+		*) echo "Invalid choice. Exiting..." ;;
+	esac
+}	
+
+# Basic setup
+function basic_setup {
+	# Formulaes
+  brew install --cask iterm2 visual-studio-code brave-browser vmware-fusion
+}
+# Intermediate setup
+function intermediate_setup {
+	basic_setup
+	brew install --cask google-drive notion notion-calendar protonvpn protonpass slack  discord
+}
+# Advanced setup
+function advanced_setup {
+	intermediate_setup
+	brew install gdb pandoc 
+	brew install --cask burp-suite postman wireshark metasploit
+	exegol_setup
+}
+
+# Exegol setup function
+function exegol_setup {
+	brew install --cask xquartz docker
+	echo "Enable \"Allow connections from network clients\" in XQuartz preferences"
+	echo "Enable File Sharing in Docker preferences to allow Exegol to access files"
+	git clone "https://github.com/ThePorgs/Exegol" /opt/Exegol
+	brew install python-argcomplete
+	python3 -m venv /opt/Exegol/Exegol-venv
+	python3 -m pip install --user --requirement /opt/Exegol/requirements.txt
+	sudo ln -s /opt/Exegol/exegol.py /usr/local/bin/exegol
+	echo "eval "$(register-python-argcomplete --no-defaults exegol)" >> $ZDOTDIR/.zsh_completions"
+	echo "Exegol setup complete."
+}	
+
 # Extract archives with extension provided
 function extract {
   if [ -z "$1" ]; then
