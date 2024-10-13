@@ -9,7 +9,7 @@ GIT_PS1_SHOWUPSTREAM="auto" # Show upstream branch
 GIT_PS1_SHOWCOLORHINTS="yes" # Show color hints
 
 # Functions #
-pub_ip() {curl -s http://ipecho.net/plain}
+pub_ip() {curl -s https://ifconfig.me/ip}
 battery() {
   if pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "100"; then
 	  echo %F{green}$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% %f
@@ -35,12 +35,19 @@ PS1=''
 # Username
 PS1+='%n'
 # Current directory with white text on black background
-PROMPT+=' %K{white}%F{black}%~%f%k'
+PROMPT+=' %~'
 # Git status
 PS1+='$(__git_ps1)'
 # Privilege level
-PS1+=' %# '
+PS1+=' %B%#%b'
+# Add a newline
+PS1+=$'\n'
+# Cursor
+PS1+='❯ '
+
 PROMPT=$PS1
+
+
 ### Right Prompt ###
 PS2=''
 # Set background color
@@ -51,11 +58,11 @@ PS2+=' 🗓 %w'
 PS2+=' ⌚️%*'
 # Public IP address
 PS2+=' 🌐$(pub_ip)'
-# Reset background color
-PS2+='%f%k'
 # BATTERY #
 PS2+=' $(charging)'
 PS2+='$(battery)'
+# Reset background color
+PS2+='%f%k'
 RPROMPT=$PS2
 
 PS3=''
