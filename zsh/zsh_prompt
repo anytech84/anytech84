@@ -21,33 +21,42 @@ battery() {
 }
 charging() {
   if pmset -g batt | grep -q " discharging"; then
-	  echo 🔋
+	  echo 🪫
 	elif pmset -g batt | grep -q " charging"; then
 	  echo 🔌
-	else
-		echo 
+	elif pmset -g batt | grep -q " charged"; then
+	  echo 🔋
 	fi
 }
 ### Left Prompt ###
 PS1=''
 # Username
 PS1+='%n'
-# Current directory
-PROMPT+=' %~'
+# Current directory with white text on black background
+PROMPT+=' %K{white}%F{black}%~%f%k'
 # Git status
 PS1+='$(__git_ps1)'
 # Privilege level
-PS1+=' %#  '
+PS1+=' %# '
 PROMPT=$PS1
 ### Right Prompt ###
 PS2=''
+# Set background color
+PS2+=' %K{white}%F{black}'
 # Date
 PS2+=' 🗓 %w'
 # Time
 PS2+=' ⌚️%*'
 # Public IP address
 PS2+=' 🌐$(pub_ip)'
+# Reset background color
+PS2+='%f%k'
 # BATTERY #
 PS2+=' $(charging)'
 PS2+='$(battery)'
 RPROMPT=$PS2
+
+PS3=''
+PS3+='%K{white}%F{black}'
+PS3+='%#'
+PS3+='%f%k'
