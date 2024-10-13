@@ -1,50 +1,53 @@
-
 # CONFIGURATION #
-autoload -Uz vcs_info colors
+autoload -Uz vcs_info colors 
+setopt prompt_subst # Enable command substitution
+setopt PROMPT_SUBST # Enable prompt substitution
+setopt transient_rprompt # Enable right prompt
 
-
-### PROMPT ###
-PROMPT=""
-
-# Git status
-GIT_PS1_SHOWUPSTREAM="auto"
-GIT_PS1_SHOWCOLORHINTS="yes"
 . $ZDOTDIR/git-prompt.sh
-setopt PROMPT_SUBST
-PROMPT+='$(__git_ps1 (%s))'
+GIT_PS1_SHOWUPSTREAM="auto" # Show upstream branch
+GIT_PS1_SHOWCOLORHINTS="yes" # Show color hints
 
+# Functions #
+pub_ip() {curl -s http://ipecho.net/plain}
+battery() {
+  if pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "100"; then
+	  echo %F{green}$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% %f
+  elif pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "20"; then
+	  echo %F{red}$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% %f 
+  else
+	  echo %F{yellow}$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% %f
+	fi
+}
+charging() {
+  if pmset -g batt | grep -q " discharging"; then
+	  echo 🔋
+	elif pmset -g batt | grep -q " charging"; then
+	  echo 🔌
+	else
+		echo 
+	fi
+}
+### Left Prompt ###
+PS1=''
 # Username
-PROMPT+=" %n"
+PS1+='%n'
 # Current directory
-PROMPT+=" %~"
+PROMPT+=' %~'
+# Git status
+PS1+='$(__git_ps1)'
 # Privilege level
-PROMPT+=" %# "
-
-### RPROMPT ###
-RPROMPT=""
-
+PS1+=' %#  '
+PROMPT=$PS1
+### Right Prompt ###
+PS2=''
 # Date
-RPROMPT="%w"
+PS2+=' 🗓 %w'
 # Time
-RPROMPT+=" at %*"
-# IP address in green
-
+PS2+=' ⌚️%*'
 # Public IP address
-RPROMPT+=" %F{green}$(curl -s http://whatismyip.akamai.com)%f"
+PS2+=' 🌐$(pub_ip)'
 # BATTERY #
-# color #
-if pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "100"; then
-    RPROMPT+="%F{green}"
-elif pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "20"; then
-    RPROMPT+="%F{red}"
-else
-    RPROMPT+="%F{yellow}"
-fi
-# battery level #
-RPROMPT+=" $(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% "
-# charging #
-if pmset -g batt | grep -q " charging"; then
-    RPROMPT+=" ⚡"
-fi
-
-
+PS2+=' $(charging)'
+PS2+='$(battery)'
+RPROMPT=$PS2
