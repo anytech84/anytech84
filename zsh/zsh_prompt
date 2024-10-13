@@ -10,17 +10,7 @@ GIT_PS1_SHOWCOLORHINTS="yes" # Show color hints
 
 # Functions #
 pub_ip() {curl -s https://ifconfig.me/ip}
-battery() {
-  if pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "100"; then
-	  echo %F{green}$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% %f
-  elif pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "20"; then
-	  echo %F{red}$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% %f 
-	elif pmset -g batt | grep -Eo "\d+%" | cut -d% -f1 | grep -q "50"; then
-	  echo %F{orange}$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% %f
-  else
-	  echo %F{yellow}$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)% %f
-	fi
-}
+battery() {pmset -g batt | grep -Eo "\d+%" | cut -d% -f1}
 charging() {
   if pmset -g batt | grep -q " discharging"; then
 	  echo 🪫
