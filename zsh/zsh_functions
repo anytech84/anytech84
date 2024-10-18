@@ -18,7 +18,7 @@ function setup {
 	# Formulaes
 	brew install coreutils gh gnupg gdb nmap openssl openvpn pyenv tree 
 	# Ask for level of setup to be done
-	echo "Which level of setup would you like to do?"
+	PS3='Which level of setup would you like to do? '
 	select level in "Basic" "Intermediate" "Advanced" "None"; do
 		case $level in
 			Basic) basic_setup; break ;;
