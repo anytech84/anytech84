@@ -1,4 +1,6 @@
 ### Prompt Configuration ###
+setopt PROMPT_SUBST		# Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
+setopt PROMPT_SP			# Allow the prompt to be split onto two lines
 
 # Display Functions #
 ip() {dig +short myip.opendns.com @resolver1.opendns.com}
@@ -26,7 +28,7 @@ PS2+='%w '
 # Time In 24-hour format HH:MM
 PS2+='%T '
 # Public IP address
-PS2+='$(ip)'				#TODO DESACTIVATE IF RETURN NONE
+PS2+='$(ip) '				#TODO DESACTIVATE IF RETURN NONE
 # BATTERY #
 #PS2+='$(charging)'
 PS2+='$(battery)'

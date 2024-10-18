@@ -12,13 +12,23 @@ function setup {
   	echo "Installing Homebrew..."
   	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
+	startup # Check for installed software with startup function
 	# Brew setup
 	brew update && brew upgrade
 	# Formulaes
 	brew install coreutils gh gnupg gdb nmap openssl openvpn pyenv tree 
 	# Ask for level of setup to be done
-  
 	echo "Which level of setup would you like to do?"
+	select level in "Basic" "Intermediate" "Advanced" "None"; do
+		case $level in
+			Basic) basic_setup; break ;;
+			Intermediate) intermediate_setup; break ;;
+			Advanced) advanced_setup; break ;;
+			None) echo "Installation stopped";break ;;
+			*) echo "Invalid option $REPLY" ;;
+		esac
+	echo "Setup complete."
+	done
 }
 
 # Basic setup
@@ -65,8 +75,8 @@ function startup {
 	echo "Node $(node -v)"
 	ruby -v
 	echo -e "\033[31mWanna pwn ?\033[0m"
-	exegol version && deactivate
-	echo -e "\033[31mWanna zsh ?\033[0m"
+	exegol version 
+	deactivate
 }
 
 # Extract archives with extension provided
