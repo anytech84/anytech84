@@ -1,61 +1,38 @@
-# CONFIGURATION #
-autoload -Uz vcs_info colors 
-setopt prompt_subst # Enable command substitution
-setopt PROMPT_SUBST # Enable prompt substitution
-setopt transient_rprompt # Enable right prompt
+### Prompt Configuration ###
 
-. $ZDOTDIR/git-prompt.sh
-GIT_PS1_SHOWUPSTREAM="auto" # Show upstream branch
-GIT_PS1_SHOWCOLORHINTS="yes" # Show color hints
-
-# Functions #
-pub_ip() {curl -s https://ifconfig.me/ip}
+# Display Functions #
+ip() {dig +short myip.opendns.com @resolver1.opendns.com}
 battery() {pmset -g batt | grep -Eo "\d+%" | cut -d% -f1}
-charging() {
-  if pmset -g batt | grep -q " discharging"; then
-	  echo 🪫
-	elif pmset -g batt | grep -q " charging"; then
-	  echo 🔌
-	elif pmset -g batt | grep -q " charged"; then
-	  echo 🔋
-	fi
-}
+
 ### Left Prompt ###
-PS1=''
-# Username
-PS1+='%n'
-# Current directory with white text on black background
-PROMPT+=' %~'
-# Git status
-PS1+='$(__git_ps1)'
+PS1=' '
+# Set text color
+PS1+='%F{green}'
+# Current directory 
+PS1+='%~ '
+# User
+#PS1+='%n '
 # Privilege level
-PS1+=' %B%#%b'
-# Add a newline
-PS1+=$'\n'
-# Cursor
-PS1+='❯ '
-
-PROMPT=$PS1
-
+PS1+='%# '
+# Reset text color
+PS1+='%f'
 
 ### Right Prompt ###
 PS2=''
-# Set background color
-PS2+=' %K{white}%F{black}'
+# Set text color
+PS2+='%F{green}'
 # Date
-PS2+=' 🗓 %w'
-# Time
-PS2+=' ⌚️%*'
+PS2+='%w '
+# Time In 24-hour format HH:MM
+PS2+='%T '
 # Public IP address
-PS2+=' 🌐$(pub_ip)'
+PS2+='$(ip)'				#TODO DESACTIVATE IF RETURN NONE
 # BATTERY #
-PS2+=' $(charging)'
+#PS2+='$(charging)'
 PS2+='$(battery)'
-# Reset background color
-PS2+='%f%k'
+# Reset text color
+PS2+='%f'
+
+PROMPT=$PS1
 RPROMPT=$PS2
 
-PS3=''
-PS3+='%K{white}%F{black}'
-PS3+='%#'
-PS3+='%f%k'

@@ -1,9 +1,5 @@
 #!/bin/zsh
 
-# Shell functions
-#setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" } 
-#freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
-
 # Initial setup function for a new Mac
 function setup {
 	# Check if git is installed
@@ -23,19 +19,7 @@ function setup {
 	# Ask for level of setup to be done
   
 	echo "Which level of setup would you like to do?"
-	echo "0. No casks"
-	echo "1. Basic"
-	echo "2. Intermediate"
-  echo "3. Advanced"
-	read -p "Enter your choice: " choice
-	case $choice in
-		0) echo "No casks selected. Exiting..." ;;
-		1) basic_setup ;;
-		2) intermediate_setup ;;
-		3) advanced_setup ;;
-		*) echo "Invalid choice. Exiting..." ;;
-	esac
-}	
+}
 
 # Basic setup
 function basic_setup {
@@ -68,6 +52,22 @@ function exegol_setup {
 	echo "eval "$(register-python-argcomplete --no-defaults exegol)" >> $ZDOTDIR/.zsh_completions"
 	echo "Exegol setup complete."
 }	
+
+# Startup function 
+function startup {
+	echo -e "\033[31mWanna work ?\033[0m"
+	zsh --version
+	git -v
+	brew -v
+	echo -e "\033[31mWanna script ?\033[0m"
+	bash --version
+	python3 -V
+	echo "Node $(node -v)"
+	ruby -v
+	echo -e "\033[31mWanna pwn ?\033[0m"
+	exegol version && deactivate
+	echo -e "\033[31mWanna zsh ?\033[0m"
+}
 
 # Extract archives with extension provided
 function extract {
