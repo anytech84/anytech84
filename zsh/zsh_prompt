@@ -1,0 +1,40 @@
+### Prompt Configuration ###
+setopt PROMPT_SUBST		# Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
+setopt PROMPT_SP			# Allow the prompt to be split onto two lines
+
+# Display Functions #
+ip() {dig +short myip.opendns.com @resolver1.opendns.com}
+battery() {pmset -g batt | grep -Eo "\d+%" | cut -d% -f1}
+
+### Left Prompt ###
+PS1=' '
+# Set text color
+PS1+='%F{green}'
+# Current directory 
+PS1+='%~ '
+# User
+#PS1+='%n '
+# Privilege level
+PS1+='%# '
+# Reset text color
+PS1+='%f'
+
+### Right Prompt ###
+PS2=''
+# Set text color
+PS2+='%F{green}'
+# Date
+PS2+='%w '
+# Time In 24-hour format HH:MM
+PS2+='%T '
+# Public IP address
+PS2+='$(ip) '				#TODO DESACTIVATE IF RETURN NONE
+# BATTERY #
+#PS2+='$(charging)'
+PS2+='$(battery)'
+# Reset text color
+PS2+='%f'
+
+PROMPT=$PS1
+RPROMPT=$PS2
+
