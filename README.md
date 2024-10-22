@@ -17,6 +17,3 @@ I am a cybersecurity enthusiast. I am interested in a wide range of topics, such
 - Radio frequency
 - Sound engineering (My first passion and former job)
 - And more...
-
-
-
