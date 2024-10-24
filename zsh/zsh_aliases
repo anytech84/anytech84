@@ -11,7 +11,7 @@ alias - -='cd -'
 alias gd="cd ~/Google\ Drive"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias docs="cd ~/Documents"
+alias doc="cd ~/Documents"
 alias dev="cd ~/Developer"
 alias vm="cd ~/Virtual\ Machines.localized/"
 # LS
@@ -32,6 +32,7 @@ alias ga='git add'
 alias gpl='git pull'
 alias gps='git push'
 # EXEGOL
+alias exegol='source /opt/Exegol/Exegol-venv/bin/activate && exegol'
 alias htb='exegol start htb'
 
 ### macOS specific ###

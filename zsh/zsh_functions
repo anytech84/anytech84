@@ -19,10 +19,13 @@ function setup {
     brew update
 	fi
 	# Formulaes
-	brew install gh npm gnupg openssl openvpn 
-	brew install autoconf bash binutils coreutils diffutils ed findutils flex gawk \
-    gnu-indent gnu-sed gnu-tar gnu-which gpatch grep gzip less m4 \
-    screen watch wdiff wget zip tree
+	brew install gh npm openssl openvpn 
+	#brew install autoconf binutils coreutils diffutils \
+    #gnu-indent gnu-sed gnu-tar gnu-which gnupg \
+		#gpatch grep gzip \
+		#m4 ed flex gawk \
+    #screen watch wdiff wget zip tree
+	
 	# Ask for level of setup to be done
 	PS3='Which level of setup would you like to do? '
 	select level in "Basic" "Intermediate" "Exegol" "Advanced" "None"; do
@@ -41,12 +44,12 @@ function setup {
 # Basic setup
 function basic_setup {
 	# Formulaes
-  brew install --cask iterm2 visual-studio-code brave-browser 
+  brew install --cask iterm2 brave-browser 
 }
 # Intermediate setup
 function intermediate_setup {
 	basic_setup
-	brew install --cask notion notion-calendar protonvpn proton-pass slack  discord
+	brew install --cask notion notion-calendar protonvpn slack discord
 }
 # Advanced setup
 function advanced_setup {
@@ -61,7 +64,9 @@ function exegol_setup {
 	brew install --cask xquartz docker
 	echo "Enable \"Allow connections from network clients\" in XQuartz preferences"
 	echo "Enable File Sharing in Docker preferences to allow Exegol to access files"
+  echo "Making /opt writable..."
 	sudo chown -R $USER /opt
+	echo "/opt is now writable."
 	git clone "https://github.com/ThePorgs/Exegol" /opt/Exegol
 	brew install python-argcomplete
 	python3 -m venv /opt/Exegol/Exegol-venv 
@@ -176,10 +181,6 @@ function getcertnames() {
 	fi;
 }
 
-# `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
-# the `.git` directory, listing directories first. The output gets piped into
-# `less` with options to preserve color and line numbers, unless the output is
-# small enough for one screen.
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }

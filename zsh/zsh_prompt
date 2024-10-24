@@ -3,17 +3,21 @@ setopt PROMPT_SUBST		# Enable parameter expansion, command substitution, and ari
 setopt PROMPT_SP			# Allow the prompt to be split onto two lines
 
 # Display Functions #
-ip() {dig +short myip.opendns.com @resolver1.opendns.com}
+local_ip() {dig +short myip.opendns.com @resolver1.opendns.com}
 battery() {pmset -g batt | grep -Eo "\d+%" | cut -d% -f1}
 
 ### Left Prompt ###
-PS1=' '
+PS1=''
 # Set text color
 PS1+='%F{green}'
 # Current directory 
 PS1+='%~ '
 # User
 #PS1+='%n '
+# Date
+#PS1+='%w '
+# Time In 24-hour format HH:MM
+#PS1+='%T '
 # Privilege level
 PS1+='%# '
 # Reset text color
@@ -27,11 +31,15 @@ PS2+='%F{green}'
 PS2+='%w '
 # Time In 24-hour format HH:MM
 PS2+='%T '
+# Path to current directory
+#PS2+='%~ '
 # Public IP address
-PS2+='$(ip) '				#TODO DESACTIVATE IF RETURN NONE
+if [[ $(local_ip) ]]; then
+	PS2+='$(local_ip) '
+fi
 # BATTERY #
 #PS2+='$(charging)'
-PS2+='$(battery)'
+PS2+='[$(battery)]'
 # Reset text color
 PS2+='%f'
 
