@@ -128,14 +128,15 @@ function vmw() {
   case $1 in
 		vmx) find ~/Virtual\ Machines.localized/ -name "*.vmx" ;;
 		list) vmrun list ;;
-    start) vmrun start "$2" nogui ;;
-    stop) vmrun stop "$2" hard ;;
-    reset) vmrun reset "$2" hard ;;
-		tools_check) vmrun checkToolsState "$2" ;;
-		tools_install) vmrun installTools "$2" ;;
-		ip) vmrun getGuestIPAddress "$2" ;;
-		ssh) ssh $(whoami)@$(vmrun getGuestIPAddress "$2") ;;
-    *) echo "Usage: vmware {vmx|list|start|stop|reset|tools_check|tools_install|ip|ssh} <path_to_vm.vmx>" ;;
+    start) vmrun start ~/Virtual\ Machines.localized/$2 nogui ;;
+    stop) vmrun stop ~/Virtual\ Machines.localized/$2 hard ;;
+    reset) vmrun reset ~/Virtual\ Machines.localized/$2 hard ;;
+		check) vmrun checkToolsState ~/Virtual\ Machines.localized/$2 ;;
+		tools) vmrun installTools ~/Virtual\ Machines.localized/$2 ;;
+		ip) vmrun getGuestIPAddress ~/Virtual\ Machines.localized/$2 ;;
+		ssh) ssh $(whoami)@$(vmrun getGuestIPAddress $2) ;;
+		share) vmrun enableSharedFolders ~/Virtual\ Machines.localized/$2 ;;
+    *) echo "Usage: vmware {vmx|list|start|stop|reset|check|tools|ip|ssh|share} <path_to_vm.vmx>" ;;
   esac
 }
 
