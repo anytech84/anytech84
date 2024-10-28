@@ -6,6 +6,8 @@
 	<string>Default</string>
 	<key>Default Bookmark Guid</key>
 	<string>8A8393F7-653E-4547-8DE0-D177A0340BBC</string>
+	<key>EnableDivisionView</key>
+	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
 		<key>0xf701-0x2a0000-0x7d</key>
@@ -89,6 +91,10 @@
 	</dict>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
+	<key>HideActivityIndicator</key>
+	<false/>
+	<key>HideTabNumber</key>
+	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -1045,6 +1051,8 @@
 			<string>8A8393F7-653E-4547-8DE0-D177A0340BBC</string>
 			<key>Horizontal Spacing</key>
 			<real>1</real>
+			<key>Icon</key>
+			<integer>0</integer>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Jobs to Ignore</key>
@@ -1601,6 +1609,8 @@
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
+	<key>PerPaneBackgroundImage</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -1636,7 +1646,13 @@
 	</dict>
 	<key>PromptOnQuit</key>
 	<false/>
+	<key>ShowPaneTitles</key>
+	<true/>
 	<key>SoundForEsc</key>
+	<false/>
+	<key>StretchTabsToFillBar</key>
+	<true/>
+	<key>TabsHaveCloseButton</key>
 	<false/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
@@ -6172,5 +6188,7 @@
 			</dict>
 		</array>
 	</dict>
+	<key>WindowNumber</key>
+	<false/>
 </dict>
 </plist>
