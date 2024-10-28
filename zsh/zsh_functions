@@ -49,7 +49,7 @@ function basic_setup {
 # Intermediate setup
 function intermediate_setup {
 	basic_setup
-	brew install --cask notion notion-calendar protonvpn slack discord
+	brew install --cask notion notion-calendar proton-pass protonvpn slack discord
 }
 # Advanced setup
 function advanced_setup {
