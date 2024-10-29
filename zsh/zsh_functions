@@ -1,42 +1,53 @@
 #!/bin/zsh
 
-# zsh files function
-function zsh_init() {
-  # Load all zsh functions
-	ln -s ~/anytech84/zsh/ ~/.zsh
-  ln -s ~/anytech84/zsh/zshenv ~/.zshenv
-  ln -s ~/anytech84/vimrc ~/.vimrc
-}
-
 # Initial setup function for a new Mac
 function setup {
-	zsh_init
 	# Installing brew
-	which -s brew
-	if [[ $? != 0 ]] ; then
-		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	else
-    brew update
-	fi
+    	brew update
+	
 	# Formulaes
-	brew install gh npm openssl openvpn 
+	brew install openssl openvpn 
 	#brew install autoconf binutils coreutils diffutils \
-    #gnu-indent gnu-sed gnu-tar gnu-which gnupg \
-		#gpatch grep gzip \
-		#m4 ed flex gawk \
-    #screen watch wdiff wget zip tree
+    	#gnu-indent gnu-sed gnu-tar gnu-which gnupg \
+	#gpatch grep gzip \
+	#m4 ed flex gawk \
+    	#screen watch wdiff wget zip tree
 	
 	# Ask for level of setup to be done
 	PS3='Which level of setup would you like to do? '
-	select level in "Basic" "Intermediate" "Exegol" "Advanced" "None"; do
+	select level in "Basic" "Intermediate" "Advanced" "None"; do
 		case $level in
 			Basic) basic_setup; break ;;
 			Intermediate) intermediate_setup; break ;;
-			Exegol) exegol_setup; break;;
 			Advanced) advanced_setup; break ;;
 			None) echo "Installation stopped";break ;;
 			*) echo "Invalid option $REPLY" ;;
 		esac
+
+	# Ask if Proton 
+	echo "Do you want to install Proton suite ? [y/n] " 
+	read yn
+	case $yn in
+		[Yy]* ) proton_setup; break;;
+		[Nn]* ) break;;
+	esac
+
+	# Ask if Exegol 
+	echo "Do you want to install Exegol ? [y/n] " 
+	read yn
+	case $yn in
+		[Yy]* ) exegol_setup; break;;
+		[Nn]* ) break;;
+	esac
+	
+	# Ask if Copilot
+	echo "Do you want to install Copilot ? [Y/n] "
+	read yn
+	case $yn in
+		[Yy]* ) copilot_setup; break;;
+		[Nn]* ) break;;
+	esac
+
 	echo "Setup complete."
 	done
 }
@@ -49,21 +60,40 @@ function basic_setup {
 # Intermediate setup
 function intermediate_setup {
 	basic_setup
-	brew install --cask notion notion-calendar proton-pass protonvpn slack discord
+	brew install --cask notion notion-calendar slack discord
 }
 # Advanced setup
 function advanced_setup {
 	intermediate_setup
 	brew install gdb nmap
 	brew install --cask burp-suite postman wireshark metasploit
-	exegol_setup
 }
+
+# Proton setup function
+function proton_setup {
+	brew install --cask proton-mail proton-pass proton-drive proton-pass
+	echo "Proton suite setup done."
+}
+
+# Docker setup function
+function docker_setup {
+	echo "Downloading Docker.dmg"
+	curl -o https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_location=module ~/Downloads/Docker
+	echo "Attaching Docker.dmg"
+	sudo hdiutil attach ~/Downloads/Docker.dmg
+	sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
+	sudo hdiutil detach /Volumes/Docker
+	echo "Docker install done."
+}	
 
 # Exegol setup function
 function exegol_setup {
-	brew install --cask xquartz docker
+	# Downloads essential packages
+	curl -o https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.5/XQuartz-2.8.5.pkg ~/Downloads/Xquartz.pkg
 	echo "Enable \"Allow connections from network clients\" in XQuartz preferences"
+	docker_setup 
 	echo "Enable File Sharing in Docker preferences to allow Exegol to access files"
+	# Updating /opt
   echo "Making /opt writable..."
 	sudo chown -R $USER /opt
 	echo "/opt is now writable."
@@ -73,9 +103,20 @@ function exegol_setup {
 	source /opt/Exegol/Exegol-venv/bin/activate
 	pip3 install --requirement /opt/Exegol/requirements.txt
 	sudo ln -s /opt/Exegol/exegol.py /usr/local/bin/exegol
-	echo "eval "$(register-python-argcomplete --no-defaults exegol)" >> $ZDOTDIR/.zsh_completions"
 	echo "Exegol setup complete."
 }	
+
+# Copilot setup function
+function copilot_setup {
+	brew install gh npm 
+	git clone https://github.com/github/copilot.vim.git \
+  	~/.vim/pack/github/start/copilot.vim	
+	echo "Login to github"
+	gh auth login
+	echo "Input :Copilot Enable in Vim"
+	vim
+	echo "Copilot setup complete"
+}
 
 # Startup function 
 function startup {
