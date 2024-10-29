@@ -37,13 +37,18 @@ alias htb='exegol start htb'
 
 ### macOS specific ###
 
+### SPOTLIGHT ###
 # Disable Spotlight
 alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
 alias spoton="sudo mdutil -a -i on"
+
+### FINDER ###
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+### CLEANING ###
 # Recursively delete `.DS_Store` files
 alias clean_ds="find . -type f -name '*.DS_Store' -ls -delete"
 # Empty all Trash, clear Apple’s System Logs and clear download history.
@@ -55,7 +60,8 @@ alias clean_services="/System/Library/Frameworks/CoreServices.framework/Framewor
 alias big_clean="clean_ds && clean_trash && clean_dns && clean_services"
 # Airport CLI alias
 alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
-# One of @janmoesen’s ProTip™s
+
+### NETWORK ###
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "${method}"="lwp-request -m '${method}'"
 done

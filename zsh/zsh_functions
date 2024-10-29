@@ -1,17 +1,17 @@
 #!/bin/zsh
 
-# Initial setup function for a new Mac
+### SETUP ###
+
 function setup {
-	# Installing brew
-    	brew update
-	
+	# Check if Homebrew is installed
+	brew update
 	# Formulaes
 	brew install openssl openvpn 
 	#brew install autoconf binutils coreutils diffutils \
-    	#gnu-indent gnu-sed gnu-tar gnu-which gnupg \
+	#gnu-indent gnu-sed gnu-tar gnu-which gnupg \
 	#gpatch grep gzip \
 	#m4 ed flex gawk \
-    	#screen watch wdiff wget zip tree
+	#screen watch wdiff wget zip tree
 	
 	# Ask for level of setup to be done
 	PS3='Which level of setup would you like to do? '
@@ -23,7 +23,6 @@ function setup {
 			None) echo "Installation stopped";break ;;
 			*) echo "Invalid option $REPLY" ;;
 		esac
-
 	# Ask if Proton 
 	echo "Do you want to install Proton suite ? [y/n] " 
 	read yn
@@ -31,7 +30,6 @@ function setup {
 		[Yy]* ) proton_setup; break;;
 		[Nn]* ) break;;
 	esac
-
 	# Ask if Exegol 
 	echo "Do you want to install Exegol ? [y/n] " 
 	read yn
@@ -39,7 +37,6 @@ function setup {
 		[Yy]* ) exegol_setup; break;;
 		[Nn]* ) break;;
 	esac
-	
 	# Ask if Copilot
 	echo "Do you want to install Copilot ? [Y/n] "
 	read yn
@@ -47,10 +44,11 @@ function setup {
 		[Yy]* ) copilot_setup; break;;
 		[Nn]* ) break;;
 	esac
-
 	echo "Setup complete."
 	done
 }
+
+### SETUP FUNCTIONS ###
 
 # Basic setup
 function basic_setup {
@@ -69,12 +67,13 @@ function advanced_setup {
 	brew install --cask burp-suite postman wireshark metasploit
 }
 
+### SOFTWARE SETUP FUNCTIONS ###
+
 # Proton setup function
 function proton_setup {
 	brew install --cask proton-mail proton-pass proton-drive proton-pass
 	echo "Proton suite setup done."
 }
-
 # Docker setup function
 function docker_setup {
 	echo "Downloading Docker.dmg"
@@ -85,7 +84,6 @@ function docker_setup {
 	sudo hdiutil detach /Volumes/Docker
 	echo "Docker install done."
 }	
-
 # Exegol setup function
 function exegol_setup {
 	# Downloads essential packages
@@ -105,7 +103,6 @@ function exegol_setup {
 	sudo ln -s /opt/Exegol/exegol.py /usr/local/bin/exegol
 	echo "Exegol setup complete."
 }	
-
 # Copilot setup function
 function copilot_setup {
 	brew install gh npm 
@@ -118,21 +115,7 @@ function copilot_setup {
 	echo "Copilot setup complete"
 }
 
-# Startup function 
-function startup {
-	echo -e "\033[31mWanna work ?\033[0m"
-	zsh --version
-	git -v
-	brew -v
-	echo -e "\033[31mWanna script ?\033[0m"
-	bash --version
-	python3 -V
-	echo "Node $(node -v)"
-	ruby -v
-	echo -e "\033[31mWanna pwn ?\033[0m"
-	exegol version 
-	deactivate
-}
+### FUNCTIONS ###
 
 # Extract archives with extension provided
 function extract {

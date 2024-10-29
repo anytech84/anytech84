@@ -3,7 +3,7 @@ setopt PROMPT_SUBST		# Enable parameter expansion, command substitution, and ari
 setopt PROMPT_SP			# Allow the prompt to be split onto two lines
 
 # Display Functions #
-local_ip() {dig +short myip.opendns.com @resolver1.opendns.com}
+#local_ip() {dig +short myip.opendns.com @resolver1.opendns.com}
 battery() {pmset -g batt | grep -Eo "\d+%" | cut -d% -f1}
 
 ### Left Prompt ###
@@ -34,9 +34,9 @@ PS2+='%T '
 # Path to current directory
 #PS2+='%~ '
 # Public IP address
-if [[ $(local_ip) ]]; then
-	PS2+='$(local_ip) '
-fi
+#if [[ $(local_ip) ]]; then
+#	PS2+='$(local_ip) '
+#fi
 # BATTERY #
 #PS2+='$(charging)'
 PS2+='[$(battery)]'
