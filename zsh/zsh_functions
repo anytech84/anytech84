@@ -17,9 +17,9 @@ function setup {
 	PS3='Which level of setup would you like to do? '
 	select level in "Basic" "Intermediate" "Advanced" "None"; do
 		case $level in
-			Basic) basic_setup; break ;;
-			Intermediate) intermediate_setup; break ;;
-			Advanced) advanced_setup; break ;;
+			Basic) basic_setup ;;
+			Intermediate) intermediate_setup ;;
+			Advanced) advanced_setup ;;
 			None) echo "Installation stopped";break ;;
 			*) echo "Invalid option $REPLY" ;;
 		esac
@@ -27,21 +27,21 @@ function setup {
 	echo "Do you want to install Proton suite ? [y/n] " 
 	read yn
 	case $yn in
-		[Yy]* ) proton_setup; break;;
+		[Yy]* ) proton_setup ;;
 		[Nn]* ) break;;
 	esac
 	# Ask if Exegol 
-	echo "Do you want to install Exegol ? [y/n] " 
-	read yn
-	case $yn in
-		[Yy]* ) exegol_setup; break;;
-		[Nn]* ) break;;
-	esac
+	#echo "Do you want to install Exegol ? [y/n] " 
+	#read yn
+	#case $yn in
+	#	[Yy]* ) exegol_setup ;;
+	#	[Nn]* ) break;;
+	#esac
 	# Ask if Copilot
 	echo "Do you want to install Copilot ? [Y/n] "
 	read yn
 	case $yn in
-		[Yy]* ) copilot_setup; break;;
+		[Yy]* ) copilot_setup ;;
 		[Nn]* ) break;;
 	esac
 	echo "Setup complete."
@@ -53,7 +53,7 @@ function setup {
 # Basic setup
 function basic_setup {
 	# Formulaes
-  brew install --cask iterm2 brave-browser 
+  brew install --cask iterm2 brave-browser vmware-fusion docker
 }
 # Intermediate setup
 function intermediate_setup {
@@ -71,7 +71,7 @@ function advanced_setup {
 
 # Proton setup function
 function proton_setup {
-	brew install --cask proton-mail proton-pass proton-drive proton-pass
+	brew install --cask protonvpn proton-pass proton-mail proton-drive 
 	echo "Proton suite setup done."
 }
 # Docker setup function
