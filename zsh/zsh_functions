@@ -74,35 +74,7 @@ function proton_setup {
 	brew install --cask protonvpn proton-pass proton-mail proton-drive 
 	echo "Proton suite setup done."
 }
-# Docker setup function
-function docker_setup {
-	echo "Downloading Docker.dmg"
-	curl -o https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_location=module ~/Downloads/Docker.dmg
-	echo "Attaching Docker.dmg"
-	sudo hdiutil attach ~/Downloads/Docker.dmg
-	sudo /Volumes/Docker/Docker.app/Contents/MacOS/install
-	sudo hdiutil detach /Volumes/Docker
-	echo "Docker install done."
-}	
-# Exegol setup function
-function exegol_setup {
-	# Downloads essential packages
-	curl -o https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.5/XQuartz-2.8.5.pkg ~/Downloads/Xquartz.pkg
-	echo "Enable \"Allow connections from network clients\" in XQuartz preferences"
-	docker_setup 
-	echo "Enable File Sharing in Docker preferences to allow Exegol to access files"
-	# Updating /opt
-  echo "Making /opt writable..."
-	sudo chown -R $USER /opt
-	echo "/opt is now writable."
-	git clone "https://github.com/ThePorgs/Exegol" /opt/Exegol
-	brew install python-argcomplete
-	python3 -m venv /opt/Exegol/Exegol-venv 
-	source /opt/Exegol/Exegol-venv/bin/activate
-	pip3 install --requirement /opt/Exegol/requirements.txt
-	sudo ln -s /opt/Exegol/exegol.py /usr/local/bin/exegol
-	echo "Exegol setup complete."
-}	
+
 # Copilot setup function
 function copilot_setup {
 	brew install gh npm 
