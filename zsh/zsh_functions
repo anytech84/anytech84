@@ -3,11 +3,19 @@
 ### SETUP ###
 
 function setup {
+	# Symbolic link for dotfiles
+	ln -s ~/anytech84/zsh ~/.zsh
+	ln -s ~/.zsh/zsenv ~/.zshenv
+	ln -s ~/anytech84/vimrc ~/.vimrc
+	ln -s ~/anytech84/gitconfig ~/.gitconfig
+	# Make Developer directory
+	mkdir ~/Developer
 	# Check if Homebrew is installed
 	brew update
 	# Formulaes
-	brew install openssl openvpn 
-	#brew install autoconf binutils coreutils diffutils \
+	brew install openssl openvpn \
+	pyenv python-argcomplete 
+	# autoconf binutils coreutils diffutils \
 	#gnu-indent gnu-sed gnu-tar gnu-which gnupg \
 	#gpatch grep gzip \
 	#m4 ed flex gawk \
@@ -30,13 +38,6 @@ function setup {
 		[Yy]* ) proton_setup ;;
 		[Nn]* ) break;;
 	esac
-	# Ask if Exegol 
-	#echo "Do you want to install Exegol ? [y/n] " 
-	#read yn
-	#case $yn in
-	#	[Yy]* ) exegol_setup ;;
-	#	[Nn]* ) break;;
-	#esac
 	# Ask if Copilot
 	echo "Do you want to install Copilot ? [Y/n] "
 	read yn
@@ -46,6 +47,13 @@ function setup {
 	esac
 	echo "Setup complete."
 	done
+	# Ask if Exegol
+	echo "Do you want to install Exegol ? [Y/n] "
+	read yn
+	case $yn in
+		[Yy]* ) exegol_setup ;;
+		[Nn]* ) break;;
+	esac
 }
 
 ### SETUP FUNCTIONS ###
@@ -53,7 +61,7 @@ function setup {
 # Basic setup
 function basic_setup {
 	# Formulaes
-  brew install --cask iterm2 brave-browser vmware-fusion docker
+  brew install --cask iterm2 brave-browser orbstack 
 }
 # Intermediate setup
 function intermediate_setup {
@@ -88,6 +96,16 @@ function copilot_setup {
 	echo "Copilot setup complete"
 }
 
+# Exegol setup function
+function exegol_setup {
+	git clone "https://github.com/ThePorgs/Exegol" 
+	python3 -m venv Exegol/Exegol-venv
+	source Exegol/Exegol-venv/bin/activate
+	pip install --upgrade pip
+	pip install -r Exegol/requirements.txt
+	ln -s ./Exegol/exegol.py /usr/local/bin/exegol
+	echo "Exegol setup complete."
+}
 ### FUNCTIONS ###
 
 # Extract archives with extension provided

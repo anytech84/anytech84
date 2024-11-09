@@ -42,6 +42,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]]&& export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# pipx #
+export PATH="$PATH:/Users/user/.local/bin"
+
 ## Node.js ##
 export NODE_REPL_HISTORY_FILE=/dev/null
 

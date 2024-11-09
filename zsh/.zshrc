@@ -2,7 +2,7 @@
 
 for file in $ZDOTDIR/zsh_*; do
   source $file
-	echo "$(basename $file | sed 's/^zsh_//g') loaded"
+	##echo "$(basename $file | sed 's/^zsh_//g') loaded"
 done
 
 setopt always_to_end          # move the cursor to the end of the word

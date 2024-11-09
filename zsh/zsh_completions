@@ -34,6 +34,7 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 ### Custon completions ###
 # exegol completion
 eval "$(register-python-argcomplete --no-defaults exegol)"
+
 # pip zsh completion start
 #compdef -P pip[0-9.]#
 __pip() {
@@ -49,4 +50,5 @@ else
   compdef __pip -P 'pip[0-9.]#'
 fi
 # pip zsh completion end
+
 

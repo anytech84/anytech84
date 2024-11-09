@@ -32,7 +32,7 @@ alias ga='git add'
 alias gpl='git pull'
 alias gps='git push'
 # EXEGOL
-alias exegol='source /opt/Exegol/Exegol-venv/bin/activate && exegol'
+alias exegol='source ~/.local/lib/Exegol/Exegol-venv/bin/activate && exegol'
 alias htb='exegol start htb'
 
 ### macOS specific ###
@@ -58,10 +58,13 @@ alias clean_dns="dscacheutil -flushcache && killall -HUP mDNSResponder"
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias clean_services="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 alias big_clean="clean_ds && clean_trash && clean_dns && clean_services"
-# Airport CLI alias
-alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
 
 ### NETWORK ###
+# HTTP request aliases
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "${method}"="lwp-request -m '${method}'"
 done
+# Airport CLI alias
+alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+
+
