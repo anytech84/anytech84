@@ -4,20 +4,19 @@ setopt PROMPT_SP			# Allow the prompt to be split onto two lines
 
 # Display Functions #
 #local_ip() {dig +short myip.opendns.com @resolver1.opendns.com}
-battery() {pmset -g batt | grep -Eo "\d+%" | cut -d% -f1}
+#battery() {pmset -g batt | grep -Eo "\d+%" | cut -d% -f1}
 
 ### Left Prompt ###
 PS1=''
-# Set text color
+
+# Set color GREEN 
 PS1+='%F{green}'
-# Current directory 
-PS1+='%~ '
-# User
-PS1+='%n '
 # Date
-#PS1+='%w '
-# Time In 24-hour format HH:MM
-PS1+='%T '
+PS1+='%w / %T '
+# Reset text color
+PS1+='%f'
+# Set color RED
+PS1+='%F{red}'
 # Privilege level
 PS1+='%# '
 # Reset text color
@@ -25,21 +24,12 @@ PS1+='%f'
 
 ### Right Prompt ###
 PS2=''
-# Set text color
+# Set color GREEN
 PS2+='%F{green}'
-# Date
-PS2+='%w '
-# Time In 24-hour format HH:MM
-#PS2+='%T '
-# Path to current directory
-#PS2+='%~ '
-# Public IP address
-#if [[ $(local_ip) ]]; then
-#	PS2+='$(local_ip) '
-#fi
-# BATTERY #
-#PS2+='$(charging)'
-PS2+='[$(battery)]'
+# User
+#PS2+='%n '
+# Current directory 
+PS2+='%~ '
 # Reset text color
 PS2+='%f'
 
