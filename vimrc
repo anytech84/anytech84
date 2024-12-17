@@ -2,42 +2,19 @@
 set background=dark
 " Make Vim more useful
 set nocompatible
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+" Set bell off
+set noerrorbells
+set belloff=all
+" Use the OS clipboard by default
 set clipboard=unnamed
-" Enhance command-line completion
-set wildmenu
 " Allow cursor keys in insert mode
 set esckeys
 " Allow backspace in insert mode
 set backspace=indent,eol,start
-" Optimize for fast terminal connections
-set ttyfast
-" Add the g flag to search/replace by default
-set gdefault
-" Use UTF-8 without BOM
-set encoding=utf-8 nobomb
-" Change mapleader
-let mapleader=","
-" Don’t add empty newlines at the end of files
-set binary
-set noeol
-if exists("&undodir")
-	set undodir=~/.vim/undo
-endif
-" Respect modeline in files
-set modeline
-set modelines=4
-" Enable per-directory .vimrc files and disable unsafe commands in them
-set exrc
-set secure
-" Enable line numbers
-set number
 " Enable syntax highlighting
 syntax on
 " Highlight current line
 set cursorline
-" Make tabs as wide as two spaces
-set tabstop=2
 " Highlight searches
 set hlsearch
 " Ignore case of searches
@@ -50,8 +27,6 @@ set laststatus=2
 set mouse=a
 " Disable error bells
 set noerrorbells
-" Don’t reset cursor to start of line when moving around.
-set nostartofline
 " Show the cursor position
 set ruler
 " Show the current mode
@@ -60,11 +35,22 @@ set showmode
 set title
 " Show the (partial) command as it’s being typed
 set showcmd
-" Use relative line numbers
-if exists("&relativenumber")
-	set relativenumber
-	au BufReadPost * set relativenumber
-endif
-" Start scrolling three lines before the horizontal window border
-set scrolloff=3
-set viminfofile=NONE
+" set expandtab : Convert tabs to spaces
+ set expandtab ts=4 sw=4 ai
+" retab : Convert all tabs to spaces
+ retab
+" set list : Show invisible characters
+set list
+" set omnifunc=syntaxcomplete#Complete : Enable syntax completion
+set omnifunc=syntaxcomplete#Complete
+
+" SHORTCUTS
+
+" CTRL-Tab is next tab
+noremap <C-Tab> :<C-U>tabnext<CR>
+inoremap <C-Tab> <C-\><C-N>:tabnext<CR>
+cnoremap <C-Tab> <C-C>:tabnext<CR>
+" CTRL-SHIFT-Tab is previous tab
+noremap <C-S-Tab> :<C-U>tabprevious<CR>
+inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
+cnoremap <C-S-Tab> <C-C>:tabprevious<CR>

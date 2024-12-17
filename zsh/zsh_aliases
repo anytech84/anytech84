@@ -32,7 +32,7 @@ alias ga='git add'
 alias gpl='git pull'
 alias gps='git push'
 # EXEGOL
-alias exegol='source ~/.local/lib/Exegol/Exegol-venv/bin/activate && exegol'
+alias exegol='source ~/.venv/Exegol-venv/bin/activate && exegol'
 alias htb='exegol start htb'
 
 ### macOS specific ###

@@ -14,7 +14,7 @@ function setup {
 	brew update
 	# Formulaes
 	brew install openssl openvpn \
-	pyenv python-argcomplete 
+	pyenv
 	# autoconf binutils coreutils diffutils \
 	#gnu-indent gnu-sed gnu-tar gnu-which gnupg \
 	#gpatch grep gzip \
@@ -61,7 +61,7 @@ function setup {
 # Basic setup
 function basic_setup {
 	# Formulaes
-  brew install --cask iterm2 brave-browser orbstack 
+  brew install --cask iterm2 brave-browser orbstack vmware-fusion 
 }
 # Intermediate setup
 function intermediate_setup {
@@ -98,13 +98,22 @@ function copilot_setup {
 
 # Exegol setup function
 function exegol_setup {
-	git clone "https://github.com/ThePorgs/Exegol" 
-	python3 -m venv Exegol/Exegol-venv
-	source Exegol/Exegol-venv/bin/activate
-	pip install --upgrade pip
-	pip install -r Exegol/requirements.txt
-	ln -s ./Exegol/exegol.py /usr/local/bin/exegol
-	echo "Exegol setup complete."
+    echo "[ ] Setting up Exegol..."
+    git clone "https://github.com/ThePorgs/Exegol" && echo "* Exegol cloned."
+    python3 -m venv ~/.venv/Exegol-venv && echo "* Exegol venv created."
+    source ~/.venv/Exegol-venv/bin/activate
+    pip install --upgrade pip > /dev/null
+    pip install -r Exegol/requirements.txt > /dev/null && echo "* Exegol requirements installed."
+    ln -s $(pwd)/Exegol/exegol.py /usr/local/bin/exegol && echo "* Exegol symlink created."
+    ll /usr/local/bin/exegol
+    echo "[x] Exegol setup complete."
+}
+function exegol_remove {
+    echo "[ ] Removing Exegol..."
+    rm /usr/local/bin/exegol && echo "* Exegol symlink removed."
+    rm -rf ~/.venv/Exegol-venv && echo "* Exegol venv removed."
+    rm -rf Exegol && echo "* Exegol directory removed."
+    echo "[x] Exegol removed."
 }
 ### FUNCTIONS ###
 
