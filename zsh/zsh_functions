@@ -209,4 +209,11 @@ function getcertnames() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
-
+function crt() {
+    if [ -z "$1" ]; then
+        echo "Usage: crt <domain>"
+    else
+        echo "*Requesting crt.sh for ${1}*"
+        curl -s https://crt.sh//json?q\=${1} | jq . | grep common_name | cut -d":" -f2 | cut -d'"' -f2 | sort -u 
+    fi
+}

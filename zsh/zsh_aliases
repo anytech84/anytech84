@@ -31,6 +31,11 @@ alias gdiff="git diff"
 alias ga='git add'
 alias gpl='git pull'
 alias gps='git push'
+# COLORS
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 # EXEGOL
 alias exegol='source ~/.venv/Exegol-venv/bin/activate && exegol'
 alias htb='exegol start htb'

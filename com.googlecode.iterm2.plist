@@ -10,7 +10,11 @@
 	<string>Arrangement 1</string>
 	<key>Default Bookmark Guid</key>
 	<string>62E416C1-CDD3-4A3C-8FE2-074C2412D98A</string>
+	<key>DisableFullscreenTransparency</key>
+	<false/>
 	<key>EnableDivisionView</key>
+	<false/>
+	<key>EnableProxyIcon</key>
 	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
@@ -149,6 +153,8 @@
 	<false/>
 	<key>HideMenuBarInFullscreen</key>
 	<false/>
+	<key>HideScrollbar</key>
+	<true/>
 	<key>HideTab</key>
 	<true/>
 	<key>HideTabNumber</key>
@@ -1651,6 +1657,8 @@
 	<key>StretchTabsToFillBar</key>
 	<true/>
 	<key>TabsHaveCloseButton</key>
+	<false/>
+	<key>UseBorder</key>
 	<false/>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
