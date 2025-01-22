@@ -13,8 +13,7 @@ function setup {
 	# Check if Homebrew is installed
 	brew update
 	# Formulaes
-	brew install openssl openvpn \
-	pyenv
+	brew install openssl openvpn
 	# autoconf binutils coreutils diffutils \
 	#gnu-indent gnu-sed gnu-tar gnu-which gnupg \
 	#gpatch grep gzip \
@@ -61,7 +60,7 @@ function setup {
 # Basic setup
 function basic_setup {
 	# Formulaes
-  brew install --cask iterm2 brave-browser orbstack vmware-fusion 
+  brew install --cask ghostty brave-browser orbstack vmware-fusion 
 }
 # Intermediate setup
 function intermediate_setup {
