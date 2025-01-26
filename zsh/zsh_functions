@@ -3,18 +3,18 @@
 ### SETUP ###
 
 function setup {
+    git clone github.com/anytech84/anytech84.git ~/anytech84
     # Symbolic link for dotfiles
     ln -s ~/anytech84/zsh ~/.zsh
-    ln -s ~/.zsh/zsenv ~/.zshenv
     ln -s ~/anytech84/vimrc ~/.vimrc
-    ln -s ~/anytech84/gitconfig ~/.gitconfig
+    ln -s ~/anytech84/newsboat ~/.newsboat
+    ln -s ~/.zsh/zsenv ~/.zshenv
     # Make Developer directory
     mkdir ~/Developer
     # Check if Homebrew is installed
     brew update
     # Install formulaes from Brewfile
     brew bundle install --file=~/anytech84/Brewfile
-    
     # Ask if Copilot
     echo "Do you want to install Copilot ? [Y/n] "
     read yn

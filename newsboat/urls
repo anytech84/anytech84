@@ -1,0 +1,28 @@
+# Security feeds
+https://www.cert.ssi.gouv.fr/feed/ "~cert/ANSSI" cert
+https://www.cisa.gov/cybersecurity-advisories/all.xml "~cert/CISA" cert
+https://www.us-cert.gov/ncas/alerts.xml "~cert/US-CERT" cert
+# IT Leaders feeds
+http://feeds.feedburner.com/GoogleOnlineSecurityBlog "~cyber/Google" cyber
+https://msrc-blog.microsoft.com/feed/ "~cyber/Microsoft" cyber
+https://www.exploit-db.com/rss.xml "~cyber/exploit-db" cyber
+https://www.hackerone.com/blog.rss "~cyber/hackerone" cyber
+https://www.hackthebox.com/rss/blog/all "~cyber/hackthebox" cyber
+https://blog.rapid7.com/rss/ "~cyber/rapid7" cyber
+http://feeds.feedburner.com/Unit42 "~cyber/Unit42" cyber
+# Blogs
+http://carnal0wnage.attackresearch.com/feeds/posts/default "~blog/carnal0wnage" blog
+https://jumpespjump.blogspot.com/feeds/posts/default "~blog/jumpESPjump" blog
+https://h0mbre.github.io/feed.xml "~blog/h0mbre" blog
+# Reddit RSS feeds
+https://www.reddit.com/r/hacking.rss "~r/hacking" reddit
+https://www.reddit.com/r/cybersecurity.rss "~r/cybersecurity" reddit
+https://www.reddit.com/r/netsec.rss "~r/netsec" reddit
+https://www.reddit.com/r/privacy.rss "~r/privacy" reddit
+https://www.reddit.com/r/onions.rss "~r/onions" reddit
+# Youtube RSS feeds
+https://www.youtube.com/feeds/videos.xml?channel_id=UC0ZTPkdxlAKf-V33tqXwi3Q "~yt/JohnHammond" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC7YOGHUfC1Tb6E4pudI9STA "~yt/MentalOutlaw" youtube
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UCCErkTC-VrSSLy13h4be9AQ "~yt/HortyVOD" youtube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCEi0DIwuAQNe68OK_1hAN7w "~yt/AntoineDanielVOD" youtube
