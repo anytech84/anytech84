@@ -23,7 +23,6 @@ function setup {
         [Nn]* ) break;;
     esac
     echo "Setup complete."
-    done
     
     # Ask if Exegol
     echo "Do you want to install Exegol ? [Y/n] "
