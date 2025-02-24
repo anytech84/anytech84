@@ -3,12 +3,11 @@
 ### SETUP ###
 
 function setup {
-    git clone github.com/anytech84/anytech84.git ~/anytech84
+    # Install Homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # Symbolic link for dotfiles
-    ln -s ~/anytech84/zsh ~/.zsh
     ln -s ~/anytech84/vimrc ~/.vimrc
     ln -s ~/anytech84/newsboat ~/.newsboat
-    ln -s ~/.zsh/zsenv ~/.zshenv
     # Make Developer directory
     mkdir ~/Developer
     # Check if Homebrew is installed
