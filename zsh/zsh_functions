@@ -157,3 +157,48 @@ function getcertnames() {
 function tre() {
     tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+function volatility() {
+
+    if ! command -v docker &> /dev/null; then
+        echo "Docker is not installed. Please install Docker first."
+        exit 0
+    fi
+
+    if [[ "$1" == "--help" ]]; then
+        echo "Usage:"
+        echo "volatility -f <path_to_memory_dump> <plugin> [options]"
+        echo "* precise /dumps/<dump_file> for Volatility 2*"
+        echo ""
+        echo "volatility <plugin> --help"
+        echo ""
+    fi
+
+    # Ask the user for the version of Volatility to use
+    echo "Please specify the version of Volatility you want to use (2 or 3):"
+    read version
+    # Set the Docker image and workspace based on the version
+    if [[ "$version" == "2" ]]; then
+        DOCKER_IMAGE="phocean/volatility"
+        WORKSPACE="/dumps"
+    elif [[ "$version" == "3" ]]; then
+        DOCKER_IMAGE="sk4la/volatility3"
+        WORKSPACE="/home/unprivileged"
+    else
+        echo "Invalid version specified. Please specify the version of Volatility you want to use (2 or 3)."
+        return 1
+    fi
+
+    # Si l'argument n'est ni "--help" ni "--shell", on l'ajoute à la commande
+    if [[ "$1" != "--help" ]]; then
+        echo "Running Volatility with the following command:"
+        if [[ "$version" == "2" ]]; then
+            echo "docker run --rm -v $(pwd):$WORKSPACE $DOCKER_IMAGE $@"
+            docker run --rm -v $(pwd):$WORKSPACE $DOCKER_IMAGE $@
+        elif [[ "$version" == "3" ]]; then
+            echo "docker run --rm -v $(pwd):$WORKSPACE $DOCKER_IMAGE $@"
+            docker run --rm -v $(pwd):$WORKSPACE --workdir $WORKSPACE $DOCKER_IMAGE $@
+        fi
+    fi
+}
+
