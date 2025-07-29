@@ -38,9 +38,9 @@ set showcmd
 " set expandtab : Convert tabs to spaces
  set expandtab ts=4 sw=4 ai
 " retab : Convert all tabs to spaces
- retab
+" retab
 " set list : Show invisible characters
-set list
+" set list
 " set omnifunc=syntaxcomplete#Complete : Enable syntax completion
 set omnifunc=syntaxcomplete#Complete
 
