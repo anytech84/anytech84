@@ -12,7 +12,7 @@ setopt auto_menu              # automatically use menu completion
 setopt auto_pushd             # Make cd push each old directory onto the stack
 #setopt completeinword         # If unset, the cursor is set to the end of the word
 setopt extended_glob          # treat #, ~, and ^ as part of patterns for filename
-setopt extended_history       # save command's beginning timestamp and duration 
+#setopt extended_history       # save command's beginning timestamp and duration 
 setopt glob_dots              # dot files included in regular globs
 setopt hist_expire_dups_first # delete duplicates firstin history 
 setopt hist_find_no_dups      # don't show results already cycled through twice

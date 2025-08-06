@@ -38,7 +38,8 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 # EXEGOL
 alias exegol='source ~/.venv/Exegol-venv/bin/activate && exegol'
-alias htb='exegol start htb'
+alias labs='exegol start labs'
+alias htb='exegol start academy'
 
 ### macOS specific ###
 

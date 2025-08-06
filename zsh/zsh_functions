@@ -7,7 +7,6 @@ function setup {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # Symbolic link for dotfiles
     ln -s ~/anytech84/vimrc ~/.vimrc
-    ln -s ~/anytech84/newsboat ~/.newsboat
     # Make Developer directory
     mkdir ~/Developer
     # Check if Homebrew is installed
