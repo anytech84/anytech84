@@ -1,0 +1,56 @@
+### Environment Variables ###
+
+# brew #
+export HOMEBREW_NO_ENV_HINTS=0
+
+# less #
+export LESSHISTFILE="-" 
+
+# history #
+export HISTSIZE=100
+export SAVEHIST=100
+
+# Remove ALL history files(zsh, less, python, node, etc...) from $HOME #
+if [[ -d $HOME/.*_history ]]; then
+    rm -rf $HOME/.*_history
+fi
+
+## Shell ##
+export SHELL=/bin/zsh
+export TERM=xterm-256color	
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+#export DISPLAY=:0
+
+## Bindkeys ##
+bindkey -e # emacs keybindings
+
+## Colors ##
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+## Editor ##
+export EDITOR=vim
+export VISUAL=vim
+bindkey -e
+
+## Homebrew ##
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+
+## Python ##
+
+
+## Node.js ##
+export NODE_REPL_HISTORY_FILE=/dev/null
+
+## Ruby ##
+
+## Java ##
+
+## Android ##
+
+## Go ##
+
+## Rust ##
+

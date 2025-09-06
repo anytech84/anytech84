@@ -1,0 +1,235 @@
+#!/bin/zsh
+
+### SETUP ###
+
+function setup {
+    # Install Homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # Symbolic link for dotfiles
+    ln -s ~/anytech84/vimrc ~/.vimrc
+    # Make Developer directory
+    mkdir ~/Developer
+    # Check if Homebrew is installed
+    brew update
+    # Install formulaes from Brewfile
+    brew bundle install --file=~/anytech84/Brewfile
+    # Ask if Copilot
+    echo "Do you want to install Copilot ? [Y/n] "
+    read yn
+    case $yn in
+        [Yy]* ) copilot_setup ;;
+        [Nn]* ) continue;;
+    esac
+    echo "Setup complete."
+    
+    # Ask if Exegol
+    echo "Do you want to install Exegol ? [Y/n] "
+    read yn
+    case $yn in
+        [Yy]* ) exegol_setup ;;
+        [Nn]* ) continue;;
+    esac
+}
+
+# Copilot setup function
+function copilot_setup {
+    brew install gh npm 
+    echo "Login to github"
+    gh auth login
+    gh extension install github/gh-copilot
+    git clone https://github.com/github/copilot.vim.git \
+    ~/.vim/pack/github/start/copilot.vim	
+    echo "Don't forget to enable Copilot in your IDE"
+    echo "Copilot setup complete"
+}
+
+# Exegol setup function
+function exegol_setup {
+    echo "[ ] Setting up Exegol..."
+    git clone "https://github.com/ThePorgs/Exegol" && echo "* Exegol cloned."
+    python3 -m venv ~/.venv/Exegol-venv && echo "* Exegol venv created."
+    source ~/.venv/Exegol-venv/bin/activate
+    pip install --upgrade pip > /dev/null
+    pip install -r Exegol/requirements.txt > /dev/null && echo "* Exegol requirements installed."
+    ln -s $(pwd)/Exegol/exegol.py /usr/local/bin/exegol && echo "* Exegol symlink created."
+    ll /usr/local/bin/exegol
+    deactivate
+    echo "[x] Exegol setup complete."
+}
+function exegol_remove {
+    echo "[ ] Removing Exegol..."
+    export EXEGOL_SOURCE=$(dirname $(readlink $(whereis -q exegol))) && rm -rf $EXEGOL_SOURCE && echo "* $EXEGOL_SOURCE directory removed." && unset EXEGOL_SOURCE
+    rm /usr/local/bin/exegol && echo "* Exegol symlink removed."
+    rm -rf ~/.venv/Exegol-venv && echo "* Exegol venv removed."
+    rm -rf ~/.exegol && echo "* Exegol configuration removed."
+    echo "[x] Exegol removed."
+}
+### FUNCTIONS ###
+
+# Extract archives with extension provided
+function extract {
+  if [ -z "$1" ]; then
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+  else
+    if [ -f $1 ]; then
+      case $1 in
+        *.tar.bz2)   tar xvjf $1    ;;
+        *.tar.gz)    tar xvzf $1    ;;
+        *.tar.xz)    tar xvJf $1    ;;
+        *.lzma)      unlzma $1      ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar x -ad $1 ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xvf $1     ;;
+        *.tbz2)      tar xvjf $1    ;;
+        *.tgz)       tar xvzf $1    ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *.xz)        unxz $1        ;;
+        *.exe)       cabextract $1  ;;
+        *)           echo "extract: '$1' - unknown archive method" ;;
+      esac
+    else
+      echo "$1 - file does not exist"
+    fi
+  fi
+}
+
+# Vmware Fusion aliases for faster VM management
+function vmw() {
+    case $1 in
+        vmx) find ~/Virtual\ Machines.localized/ -name "*.vmx" ;;
+        list) vmrun list ;;
+        start) vmrun start ~/Virtual\ Machines.localized/$2 nogui ;;
+        stop) vmrun stop ~/Virtual\ Machines.localized/$2 hard ;;
+        reset) vmrun reset ~/Virtual\ Machines.localized/$2 hard ;;
+        check) vmrun checkToolsState ~/Virtual\ Machines.localized/$2 ;;
+        tools) vmrun installTools ~/Virtual\ Machines.localized/$2 ;;
+        ip) vmrun getGuestIPAddress ~/Virtual\ Machines.localized/$2 ;;
+        ssh) ssh $(whoami)@$(vmrun getGuestIPAddress $2) ;;
+        share) vmrun enableSharedFolders ~/Virtual\ Machines.localized/$2 ;;
+        *) echo "Usage: vmware {vmx|list|start|stop|reset|check|tools|ip|ssh|share} <path_to_vm.vmx>" ;;
+    esac
+}
+
+# Create a data URL from a file
+function dataurl() {
+    local mimeType=$(file -b --mime-type "$1");
+    if [[ $mimeType == text/* ]]; then
+        mimeType="${mimeType};charset=utf-8";
+    fi
+    echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
+}
+
+# Show all the names (CNs and SANs) listed in the SSL certificate for a given domain
+function getcertnames() {
+    if [ -z "${1}" ]; then
+        echo "ERROR: No domain specified.";
+        return 1;
+    fi;
+
+    local domain="${1}";
+    echo "Testing ${domain}…";
+    echo ""; # newline
+
+    local tmp=$(echo -e "GET / HTTP/1.0\nEOT" \
+        | openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1);
+
+    if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
+        local certText=$(echo "${tmp}" \
+            | openssl x509 -text -certopt "no_aux, no_header, no_issuer, no_pubkey, \
+            no_serial, no_sigdump, no_signame, no_validity, no_version");
+        echo "Common Name:";
+        echo ""; # newline
+        echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//" | sed -e "s/\/emailAddress=.*//";
+        echo ""; # newline
+        echo "Subject Alternative Name(s):";
+        echo ""; # newline
+        echo "${certText}" | grep -A 1 "Subject Alternative Name:" \
+            | sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2;
+        return 0;
+    else
+        echo "ERROR: Certificate not found.";
+        return 1;
+    fi;
+}
+
+function tre() {
+    tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
+
+function volatility() {
+
+    if ! command -v docker &> /dev/null; then
+        echo "Docker is not installed. Please install Docker first."
+        exit 0
+    fi
+
+    if [[ "$1" == "--help" ]]; then
+        echo "Usage:"
+        echo "volatility -f <path_to_memory_dump> <plugin> [options]"
+        echo "* precise /dumps/<dump_file> for Volatility 2*"
+        echo ""
+        echo "volatility <plugin> --help"
+        echo ""
+    fi
+
+    # Ask the user for the version of Volatility to use
+    echo "Please specify the version of Volatility you want to use (2 or 3):"
+    read version
+    # Set the Docker image and workspace based on the version
+    if [[ "$version" == "2" ]]; then
+        DOCKER_IMAGE="phocean/volatility"
+        WORKSPACE="/dumps"
+    elif [[ "$version" == "3" ]]; then
+        DOCKER_IMAGE="sk4la/volatility3"
+        WORKSPACE="/home/unprivileged"
+    else
+        echo "Invalid version specified. Please specify the version of Volatility you want to use (2 or 3)."
+        return 1
+    fi
+
+    # Si l'argument n'est ni "--help" ni "--shell", on l'ajoute à la commande
+    if [[ "$1" != "--help" ]]; then
+        echo "Running Volatility with the following command:"
+        if [[ "$version" == "2" ]]; then
+            echo "docker run --rm -v $(pwd):$WORKSPACE $DOCKER_IMAGE $@"
+            docker run --rm -v $(pwd):$WORKSPACE $DOCKER_IMAGE $@
+        elif [[ "$version" == "3" ]]; then
+            echo "docker run --rm -v $(pwd):$WORKSPACE $DOCKER_IMAGE $@"
+            docker run --rm -v $(pwd):$WORKSPACE --workdir $WORKSPACE $DOCKER_IMAGE $@
+        fi
+    fi
+}
+
+function crypt() {
+  #encrypt files with aes-256-ctr cipher using openssl
+
+  #encrypt files
+  if [ "$1" == "-e" ]; then
+    if [ -f "$2" ]; then
+      openssl aes-256-ctr -a -e -salt -in "$2" -out "$2.encrypt"
+      #rm "$2"
+    else
+      echo "This file does not exist!"
+    fi
+  #decrypt files
+  elif [ "$1" == "-d" ]; then
+    if [ -f "$2" ]; then
+      openssl aes-256-ctr -a -d -salt -in "$2" -out "$2.decrypt"
+      #rm "$2"
+    else
+      echo "This file does not exist!"
+    fi
+  #show help
+  elif [ "$1" == "--help" ]; then
+    echo "This software uses openssl for encrypting files with the aes-256-ctr cipher"
+    echo "Usage for encrypting: crypt -e [file]"
+    echo "Usage for decrypting: crypt -d [file]"
+  else
+    echo "This action does not exist!"
+    echo "Use --help to show help."
+  fi
+}
+
