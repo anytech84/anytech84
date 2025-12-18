@@ -1,7 +1,7 @@
 ### ZSH SOURCE FILES ###
 export ZDOTDIR=~/.zsh
 
-for file in $ZDOTDIR/zsh_*; do
+for file in $ZDOTDIR/zsh*; do
   source $file
 ##echo "$(basename $file | sed 's/^zsh_//g') loaded"
 done

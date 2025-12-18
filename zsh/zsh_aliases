@@ -36,19 +36,21 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-# IPROUTE2MAC
-alias ipa='ip -4 -c addr'
-alias ipr='ip -4 -c route'
-alias ipl='ip -4 -c link'
-alias ipn='ip -4 -c neigh'
+# Obsidian
+alias obsidian="cd /Users/admin/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/Cloud_Vault/"
+
 #SHADOWSOCKS PROXY
 alias ss_prox='orb ss-local -v -c /Users/admin/Documents/ressources_infosec/proxies/ss_creds_bb.json'
-# Network Troubleshooting
-alias fp='fping -aqg' 
 # EXEGOL
 alias exegol='source ~/.venv/Exegol-venv/bin/activate && exegol'
-alias labs='exegol start labs'
-alias htb='exegol start academy'
+alias htb='exegol start htb'
+alias academy='exegol start academy'
+# RFSWIFT
+alias rfswift='/Users/admin/.rfswift/bin/rfswift'
+
+# DOCKER RUN ONE-TIMER
+alias jupyter='docker run -it --rm -p 8888:8888 -v "$(pwd):/home/jovyan/work/" jupyter/scipy-notebook:latest'
+alias cyberchef='docker run -it --rm -p 8000:80 ghcr.io/gchq/cyberchef:latest'
 
 ### macOS specific ###
 
@@ -79,4 +81,10 @@ alias big_clean="clean_ds && clean_trash && clean_dns && clean_services"
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "${method}"="lwp-request -m '${method}'"
 done
-
+# FPING
+alias fp='fping -aqg'
+# IPROUTE2MAC
+alias ipa='ip -4 -c addr'
+alias ipr='ip -4 -c route'
+alias ipl='ip -4 -c link'
+alias ipn='ip -4 -c neigh'

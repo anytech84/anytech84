@@ -12,7 +12,7 @@ function setup {
     # Check if Homebrew is installed
     brew update
     # Install formulaes from Brewfile
-    brew bundle install --file=~/anytech84/Brewfile
+    brew bundle install --file=~/anytech84/Brewfiles/Brewfile
     # Ask if Copilot
     echo "Do you want to install Copilot ? [Y/n] "
     read yn
@@ -194,10 +194,10 @@ function volatility() {
     if [[ "$1" != "--help" ]]; then
         echo "Running Volatility with the following command:"
         if [[ "$version" == "2" ]]; then
-            echo "docker run --rm -v $(pwd):$WORKSPACE $DOCKER_IMAGE $@"
+            echo "docker run -v --rm $(pwd):$WORKSPACE $DOCKER_IMAGE $@"
             docker run --rm -v $(pwd):$WORKSPACE $DOCKER_IMAGE $@
         elif [[ "$version" == "3" ]]; then
-            echo "docker run --rm -v $(pwd):$WORKSPACE $DOCKER_IMAGE $@"
+            echo "docker run -it -v --rm $(pwd):$WORKSPACE $DOCKER_IMAGE $@"
             docker run --rm -v $(pwd):$WORKSPACE --workdir $WORKSPACE $DOCKER_IMAGE $@
         fi
     fi
