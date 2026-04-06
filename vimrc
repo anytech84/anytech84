@@ -1,5 +1,5 @@
 " VIM GENERAL SETTINGS
-set nocompatible
+"set nocompatible
 set nobackup
 
 " FILETYPE OPTIONS
@@ -13,6 +13,7 @@ set title
 set cursorline
 set cursorcolumn
 set ruler
+set nowrap
 
 " INDENTATION SETTINGS
 set shiftwidth=4

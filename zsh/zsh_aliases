@@ -37,20 +37,24 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 # Obsidian
-alias obsidian="cd /Users/admin/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/Cloud_Vault/"
+alias obsidian="cd /Users/admin/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/iCloud_Vault/"
 
 #SHADOWSOCKS PROXY
-alias ss_prox='orb ss-local -v -c /Users/admin/Documents/ressources_infosec/proxies/ss_creds_bb.json'
+alias ss_prox='docker run --name ss --rm -p 1080:1080 -v /Users/admin/Documents/ressources_infosec/proxies/:/mnt/proxies shadowsocks/shadowsocks-libev ss-local -v -b 0.0.0.0 -c /mnt/proxies/ss_creds_bb.json'
 # EXEGOL
 alias exegol='source ~/.venv/Exegol-venv/bin/activate && exegol'
 alias htb='exegol start htb'
 alias academy='exegol start academy'
 # RFSWIFT
 alias rfswift='/Users/admin/.rfswift/bin/rfswift'
+# Claude Code
+alias ollama='docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama'
+alias claude_ollama='ANTHROPIC_AUTH_TOKEN=ollama ANTHROPIC_BASE_URL=http://studio.local:11434 ANTHROPIC_API_KEY="" claude --model qwen3-coder'
 
 # DOCKER RUN ONE-TIMER
 alias jupyter='docker run -it --rm -p 8888:8888 -v "$(pwd):/home/jovyan/work/" jupyter/scipy-notebook:latest'
 alias cyberchef='docker run -it --rm -p 8000:80 ghcr.io/gchq/cyberchef:latest'
+alias idf='docker run --rm -v $PWD:/project -w /project -u $UID -e HOME=/tmp -it espressif/idf'
 
 ### macOS specific ###
 
