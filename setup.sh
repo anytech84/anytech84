@@ -25,7 +25,7 @@ function setup {
     read yn
     case $yn in
         ([Yy]*) setup_function ;;
-        ([Nn]*) continue ;;
+        ([Nn]*) exit ;;
     esac
     echo "Setup done. Welcome back."
 } 

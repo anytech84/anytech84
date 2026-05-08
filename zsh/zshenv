@@ -6,7 +6,10 @@ export HOMEBREW_NO_ENV_HINTS=0
 # less #
 export LESSHISTFILE="-" 
 
-# history #
+# login
+SHELL_SESSIONS_DISABLE=1
+
+# history
 export HISTSIZE=100
 export SAVEHIST=100
 

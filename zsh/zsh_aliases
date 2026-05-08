@@ -1,5 +1,5 @@
 ### Everyday aliases ###
-
+alias listen="ffplay -f s16le -ar 16000 -i tcp://192.168.1.28:8080"
 # CD
 alias ..="cd .."
 alias ...="cd ../.."

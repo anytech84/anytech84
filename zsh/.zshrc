@@ -1,4 +1,6 @@
 ### ZSH SOURCE FILES ###
+clear 
+
 export ZDOTDIR=~/.zsh
 
 for file in $ZDOTDIR/zsh*; do
@@ -31,3 +33,7 @@ setopt numeric_glob_sort      # globs sorted numerically
 setopt pushd_ignore_dups      # Don't push duplicates onto the stack
 setopt share_history          # share history between instances of the shell
 
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select
