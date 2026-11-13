@@ -48,9 +48,11 @@ alias htb='exegol start htb'
 alias academy='exegol start academy'
 # RFSWIFT
 alias rfswift='/Users/admin/.rfswift/bin/rfswift'
-# Claude Code
+# Local Claude
 alias ollama='docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama'
 alias claude_ollama='ANTHROPIC_AUTH_TOKEN=ollama ANTHROPIC_BASE_URL=http://studio.local:11434 ANTHROPIC_API_KEY="" claude --model qwen3-coder'
+# Tools
+alias fimnaw_source='source ~/.venv/fimnaw-venv/bin/activate'
 
 # DOCKER RUN ONE-TIMER
 alias jupyter='docker run -it --rm -p 8888:8888 -v "$(pwd):/home/jovyan/work/" jupyter/scipy-notebook:latest'
@@ -89,7 +91,7 @@ done
 # FPING
 alias fp='fping -aqg'
 # IPROUTE2MAC
-alias ipa='ip -4 -c addr'
-alias ipr='ip -4 -c route'
-alias ipl='ip -4 -c link'
-alias ipn='ip -4 -c neigh'
+alias ipa='ip -c --brief addr'
+alias ipr='ip -c --brief route'
+alias ipl='ip -c --brief link'
+alias ipn='ip -c --brief neigh'

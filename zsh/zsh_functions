@@ -188,3 +188,14 @@ function crypt() {
   fi
 }
 
+function cheat(){
+    if [ -z "$1" ]; then
+        echo "Use --help to show help, and --list to show available cheat sheets."
+    elif [ "$1" == "--help" ]; then
+        curl https://cht.sh/:help
+    elif [ "$1" == "--list" ]; then
+        curl https://cht.sh/:list
+    else
+    curl https://cht.sh/$1
+    fi
+}
